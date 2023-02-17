@@ -1,6 +1,26 @@
-
-.title{
-    color:rgb(6, 55, 98);
-    text-align: center;
-    padding:5px;
+:host {
+    .title{
+        color:gold;
+        background-color:cadetblue;
+        text-align: center;
+        border-style: solid;
+        border-width: 4px;
+        border-color:darkslateblue;
     }
+    .boy {
+        background-color:#F0EDCC;
+        color:#267bbb;
+    }
+
+    .girl {
+        background-color:#ACC7B4;
+        color:#815854;
+        
+    }
+
+    .nothing {
+        background-color:#FFDFDE;
+        color:#6A7BA2;
+    }
+    
+};

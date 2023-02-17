@@ -1,6 +1,39 @@
 
-<h2 class="title">13 Reasons Why</h2><div>
+<!-- <h2 class="title">13 Reasons Why</h2><div>
     <app-content-card *ngFor="let item of reasonswhy; index as i; first as isFirst; odd as odd; even as even;" [char]="item"
       class="reasons-{{i+1}}"  [class.is-odd]="odd" [class.is-even]="even">
     </app-content-card>
+</div> -->
+
+
+<div><label>
+  Title name search:
+  <input #titleToSearchFor>
+</label>
+<button (click)="checkForTitleInList(titleToSearchFor.value)">Check for Title</button>
 </div>
+<div class="title-error" [style]="titleSearchMessage.found ? 'color: green' : 'color: red'">
+{{ titleSearchMessage.message }}
+</div>
+
+<h3 class="title">Type-Boy</h3>
+<div *ngFor="let item of (reasonswhy ); index as i; first as isFirst; odd as odd; even as even;" >
+  <app-content-card *ngIf="item.type=='Boy'" [char]="item" 
+  class="chess-player-{{i}}" class="boy" >
+</app-content-card>
+</div>
+
+<h3 class="title">Type-Girl</h3>
+<div *ngFor="let item of (reasonswhy ); index as i; first as isFirst; odd as odd; even as even;" >
+  <app-content-card *ngIf="item.type=='Girl'" [char]="item" 
+   class="chess-player-{{i}}" class="girl">
+ </app-content-card>
+ </div>
+
+ <h3 class="title">Type-Not Found</h3>
+ <div *ngFor="let item of (reasonswhy ); index as i; first as isFirst; odd as odd; even as even;" >
+  <app-content-card *ngIf="item.type==''" [char]="item" 
+   class="chess-player-{{i}}" class="nothing">
+ </app-content-card>
+ </div>
+

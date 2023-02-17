@@ -10,6 +10,11 @@ import { Content } from '../helper-files/content-interface';
 
 export class ContentListComponent implements OnInit {
   reasonswhy:Content[];
+  types: string[] = ["", "IM", "FM", "GM"];
+  titleSearchMessage = {
+    message: "",
+    found: false
+  };
 
   constructor() {
 
@@ -19,7 +24,7 @@ export class ContentListComponent implements OnInit {
       body: 'Clay Jason Jensen is a fictional character created by author Jay Asher. He is the protagonist in Thirteen Reasons Why, a novel written for teenagers where a girl, Hannah Baker, commits suicide.',
       author: 'Jay Asher',
       imgURL: 'https://flxt.tmsimg.com/assets/316785_v9_bb.jpg',
-      type: 'Main Character',
+      type: 'Boy',
       hashtag: ['Helmet']
     },
     {
@@ -55,7 +60,7 @@ export class ContentListComponent implements OnInit {
       body: "Tony Padilla, Clay's best friend at Liberty High who tries to help him deal with Hannah's death. Before her death, Hannah gives Tony the audio cassettes and holds him responsible for making sure everyone on the cassettes hears them.",
       author: 'Jay Asher',
       imgURL: 'https://m.media-amazon.com/images/M/MV5BOTZiOTc4OWQtYjQ5MC00MmVjLTk5OTYtMDE4MWQ5OWJkYTI3XkEyXkFqcGdeQXVyNTI5NjIyMw@@._V1_.jpg',
-      type: 'Boy',
+      type: '',
       hashtag: ['Tony']
     },
     {
@@ -66,9 +71,52 @@ export class ContentListComponent implements OnInit {
       imgURL: 'https://akns-images.eonline.com/eol_images/Entire_Site/2020518/rs_600x600-200618112436-600-Ross-Butler.jpg?fit=around%7C1080:1080&output-quality=90&crop=1080:1080;center,top',
       type: 'Boy',
       hashtag: ['Zach']
-    }
+    },
+    {
+      id: 6,
+      title: 'Bryce Walker',
+      body: " Bryce Walker, a student from a rich family and the captain of the football team and pitcher on the baseball team at Liberty High. He was friends with Justin, Zach, and Monty.",
+      author: 'Jay Asher',
+      imgURL: 'https://media1.popsugar-assets.com/files/thumbor/UdVb0TR9c6UJJnXMJ1_tyKNbN5A/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2019/07/28/806/n/44701584/0d0f6dbf13e08598_GettyImages-978578768/i/Justin-Prentice-Bryce-Walker.jpg',
+      type: '',
+      hashtag: ['Bryce']
+    } 
     ]
   }
+ 
+  value = '';
+  getValue(input:string)
+  {
+    let inputBox = (<HTMLInputElement>document.querySelector('input'));
+    this.reasonswhy.forEach(e => {
+      if(e.title === input)
+      {
+        this.value = `Content item exists with the Title ${input}`
+        inputBox.style.color = "green";
+        return  this.value;
+        
+      }
+      else
+      {
+        this.value = `Content item doesn't exists with the Title ${input}`;
+        inputBox.style.color = "red";
+        return  this.value;
+      }
+    })
+  }
+
   ngOnInit(): void {
   }
+  checkForTitleInList(titleNameValue: string): void {
+    if (this.reasonswhy.some(player => player.title === titleNameValue)) {
+      this.titleSearchMessage.message = "Title Found";
+      this.titleSearchMessage.found = true;
+    }
+    else {
+      this.titleSearchMessage.message = "Title Not Found";
+      this.titleSearchMessage.found = false;
+    }
+  }
+
 }
+
