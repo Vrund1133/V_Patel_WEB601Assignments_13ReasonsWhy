@@ -4,7 +4,7 @@ export interface Content {
     title : string;
     body? : string;
     author : string;
-    imgURL : string;
+    imgURL? : string;
     type : string;
     hashtag? : string[];
 }

@@ -32,7 +32,7 @@ export class ContentListComponent implements OnInit {
       title: 'Jessica Davis',
       body: "She was the second best friend of Hannah Baker before she committed suicide, and is a person on Hannah's tapes. It's later revealed that Jessica was raped by Bryce Walker, and after coming to terms with this, decides to stand up to him, Liberty High, and increase the awareness of rape victims.",
       author: 'Jay Asher',
-      imgURL: 'http://t2.gstatic.com/licensed-image?q=tbn:ANd9GcQcflB3IqyYLKtkkSMGG-Wa-ks-78otBqwoQ7EM60n-myKNCb7Y8J4Fd9Cl6jZA8yZB_sF9oDZmcit9P44',
+      // imgURL: 'http://t2.gstatic.com/licensed-image?q=tbn:ANd9GcQcflB3IqyYLKtkkSMGG-Wa-ks-78otBqwoQ7EM60n-myKNCb7Y8J4Fd9Cl6jZA8yZB_sF9oDZmcit9P44',
       type: 'Girl',
       hashtag: ['Davis']
     },
