@@ -1,3 +1,4 @@
+
 import { Pipe, PipeTransform } from '@angular/core';
 import { Content } from './helper-files/content-interface';
 
@@ -6,7 +7,6 @@ import { Content } from './helper-files/content-interface';
 })
 export class TypePipe implements PipeTransform {
 
-
   transform(contentItem: Content[], filter?: String): any {
     if(!filter){
       return contentItem.filter(item => !item.type);
@@ -14,6 +14,4 @@ export class TypePipe implements PipeTransform {
 
     return contentItem.filter(item => item.type === filter);
   }
- 
-
 }
