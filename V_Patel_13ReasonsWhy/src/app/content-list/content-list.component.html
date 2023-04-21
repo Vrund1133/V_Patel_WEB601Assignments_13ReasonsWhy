@@ -1,5 +1,3 @@
-
-
  
  <input type="number" [(ngModel)]="IDsearch" placeholder=" Search By ID Here" >
  <button (click)="searchId(IDsearch)">Search</button>
@@ -8,12 +6,9 @@
   <app-create-content (createEvent)="addContent($event)">
     
   </app-create-content>
-  <p *ngIf="failedStringMessage !== ''">{{failedStringMessage}}</p>
+  <p *ngIf="failingMessage !== ''">{{failingMessage}}</p>
   <br><br>
   </main>
-  
- 
-  
   
   <h1 class="center">Search results</h1>
   <div *ngFor="let content of reasonswhy | TypePipe:'classic'" class="classic-type">
@@ -41,37 +36,8 @@
   
   <br> <br>
   
+<!-- Different Types -->
 
-  
-<!--   
-  <p *ngIf="searchResult !== null" >
-      <span [style.color]="searchResults ? 'green' : 'red'">
-          {{searchResults ? 'Title Found' : 'Title NOt Found'}}
-          <h1>Search Result Found</h1>
-          <div *ngFor="let content of reasonswhy" >
-              <h2>{{content.title}}</h2>
-              <p>Author: {{content.author}}</p>
-              <p appHoverAffect>Type: {{content.type}}</p>
-          
-              <div>
-                  Hashtag: 
-                  <p *ngFor="let tag of content.hashtag" [appHoverAffect]="'bold'">{{tag}}</p>
-              </div>
-          
-              <div *ngIf="content.imgURL; else defaultImg">
-                  <img (click)="logIdTitle(content)" src="{{content.imgURL}}">
-              </div>
-              <ng-template #defaultImg>
-                  <img (click)="logIdTitle(content)" src="{{defaultImageURL}}">
-              </ng-template>
-              </div>
-     
-      </span>
-      
-  </p>
-  
-  <br> <br> -->
-  
   <h1>Type Not Found</h1>
   <div *ngFor="let content of reasonswhy | TypePipe" class="nothing">
       <h2>{{content.title}}</h2>

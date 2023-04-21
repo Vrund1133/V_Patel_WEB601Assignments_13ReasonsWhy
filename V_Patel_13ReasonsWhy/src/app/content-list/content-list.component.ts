@@ -1,6 +1,4 @@
 
-
-
 import { Component, OnInit } from '@angular/core';
 import { Content } from '../helper-files/content-interface';
 
@@ -16,7 +14,7 @@ export class ContentListComponent  {
   reasonswhy: Content[];
   titleSearchText:string = '';
   searchResult: boolean | null = null;
-  failedStringMessage: string = '';
+  failingMessage: string = '';
 
   public inputValue: String = '';
   public searchMsg: String = '';
@@ -25,52 +23,9 @@ export class ContentListComponent  {
   public IDsearch!: number;
   public searchResults: any[] = [];
 
-// Reasonswhy: any;
 
-  logIdTitle(card: any){
-    console.log(`${card.id}, ${card.title}`);
-    console.log(`id:- ${card.id}`);
-     console.log(`Title:- ${card.title}`);
-  }
-  SearchTitle(){
-    console.log(this.searchResult);
-    console.log("SearchResultText:-",this.searchResult);
-    console.log("SearchText:-",this.titleSearchText);
-    this.searchResult = this.reasonswhy.some(content => content.title.toLocaleLowerCase().includes (this.titleSearchText.toLocaleLowerCase()));
-  }
-
-  searchId(id: number) {
-    const title = this.reasonswhy.find(title => title.id === id);
-    console.log('Title ID For result:', title);
-    if (title) {
-      console.log('Title found:', title);
-      this.searchResults.push(title);
-  
-    } else {
-      console.log('Title not found');
-    }
-  }
-
-  addContent(newInfo: any){
-    console.log(this.failedStringMessage);
-    const promise = new Promise((resolve, reject) => {
-      this.reasonswhy.push(newInfo);
-      this.reasonswhy = [...this.reasonswhy]
-      resolve(newInfo.title);
-    });
-
-    promise.then(title => {
-      console.log(`Information added successfully, ${title}`);
-      this.failedStringMessage = '';
-    }).catch(error => {
-      this.failedStringMessage = "Information not added";
-    });
-  }
-
-  
 
     constructor() {
-
     this.reasonswhy = [{
       id: 0,
       title: 'Clay Jensen',
@@ -133,10 +88,53 @@ export class ContentListComponent  {
       imgURL: 'https://media1.popsugar-assets.com/files/thumbor/UdVb0TR9c6UJJnXMJ1_tyKNbN5A/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2019/07/28/806/n/44701584/0d0f6dbf13e08598_GettyImages-978578768/i/Justin-Prentice-Bryce-Walker.jpg',
       type: '',
       hashtag: ['Bryce']
-    } ,
-    
+    }
   ];
 }
+
+// Reasonswhy: any;
+
+logIdTitle(card: any){
+  console.log(`${card.id}, ${card.title}`);
+  console.log(`id:- ${card.id}`);
+  console.log(`Title:- ${card.title}`);
+}
+SearchTitle(){
+  console.log(this.searchResult);
+  console.log("SearchResultText:-",this.searchResult);
+  console.log("SearchText:-",this.titleSearchText);
+  this.searchResult = this.reasonswhy.some(content => content.title.toLocaleLowerCase().includes (this.titleSearchText.toLocaleLowerCase()));
+}
+
+searchId(id: number) {
+  const title = this.reasonswhy.find(title => title.id === id);
+  console.log('Title ID For result:', title);
+  if (title) {
+    console.log('Title found:', title);
+    this.searchResults.push(title);
+
+  } else {
+    console.log('Title not found');
+  }
+}
+
+addContent(newInfo: any){
+  console.log(this.failingMessage);
+  const promise = new Promise((resolve, reject) => {
+    this.reasonswhy.push(newInfo);
+    this.reasonswhy = [...this.reasonswhy]
+    resolve(newInfo.title);
+  });
+
+  promise.then(title => {
+    console.log(`Characters added successfully, ${title}`);
+    this.failingMessage = '';
+  }).catch(error => {
+    this.failingMessage = "Characters not added";
+  });
+}
+
+
   
   showTitleInfo(id: any, title: String) {
     console.log({ id, title });
