@@ -1,0 +1,20 @@
+
+<div class="center">
+    <fieldset>
+        <div class="AddContent">
+<h1>Fill the form</h1>
+    <b> ID :- </b>  <input type="number" [(ngModel)]="valueContainer.id"> <br> <br>
+    <b>Title :- </b> <input type="text" [(ngModel)]="valueContainer.title"> <br> <br>
+    <b>body:- </b> <input type="text" [(ngModel)]="valueContainer.body"> <br> <br>
+    <b>Type :- </b><input type="text" [(ngModel)]="valueContainer.type"> <br> <br>
+    <b>ImgUrl :- </b><input type="text" [(ngModel)]="valueContainer.imgURL"> <br> <br> 
+    <b>Author :- </b><input type="text" [(ngModel)]="valueContainer.author"> <br> <br>
+    <b>hashtag :- </b> <input type="text" [(ngModel)]="valueContainer.hashtag"> <br> <br>
+    
+    
+    <div>
+        <button (click)="addContentEvents()">Add New Content</button>
+    </div>
+</div>
+</fieldset>
+  </div>

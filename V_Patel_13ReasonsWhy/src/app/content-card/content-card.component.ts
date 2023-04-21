@@ -1,5 +1,4 @@
-
-import { Component, Input, OnInit } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { Content } from '../helper-files/content-interface';
 
 @Component({
@@ -7,23 +6,6 @@ import { Content } from '../helper-files/content-interface';
   templateUrl: './content-card.component.html',
   styleUrls: ['./content-card.component.scss']
 })
-
 export class ContentCardComponent implements OnInit {
-  @Input() char?: Content;
-  static characterCount = 0;
-  private characters: Content[];
-
-  constructor() {
-    this.characters = []; 
-  }
-  get character():Content[] {
-    return this.characters;
-  }
-  mychardetails(){
-    console.log(this.char?.id);
-    console.log(this.char?.title);
-  }
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -1,39 +1,135 @@
 
-<!-- <h2 class="title">13 Reasons Why</h2><div>
-    <app-content-card *ngFor="let item of reasonswhy; index as i; first as isFirst; odd as odd; even as even;" [char]="item"
-      class="reasons-{{i+1}}"  [class.is-odd]="odd" [class.is-even]="even">
-    </app-content-card>
-</div> -->
 
+ 
+ <input type="number" [(ngModel)]="IDsearch" placeholder=" Search By ID Here" >
+ <button (click)="searchId(IDsearch)">Search</button>
 
-<div><label>
-  Title name search:
-  <input #titleToSearchFor>
-</label>
-<button (click)="checkForTitleInList(titleToSearchFor.value)">Check for Title</button>
-</div>
-<div class="title-error" [style]="titleSearchMessage.found ? 'color: green' : 'color: red'">
-{{ titleSearchMessage.message }}
-</div>
+ <main>
+  <app-create-content (createEvent)="addContent($event)">
+    
+  </app-create-content>
+  <p *ngIf="failedStringMessage !== ''">{{failedStringMessage}}</p>
+  <br><br>
+  </main>
+  
+ 
+  
+  
+  <h1 class="center">Search results</h1>
+  <div *ngFor="let content of reasonswhy | TypePipe:'classic'" class="classic-type">
+      <div *ngFor="let result of searchResults">
+      <h2>{{result.title}}</h2>
+      <p>Author: {{result.author}}</p>
+      <p appHoverAffect>Type: {{result.type}}</p>
+  
+      <h5 class="card-title" *ngIf="content?.title">
+          {{ result.title }}
+        </h5>   
+      <div>
+          Hashtag: 
+          <p *ngFor="let tag of content.hashtag" [appHoverAffect]="'bold'">{{tag}}</p>
+      </div>
+  
+      <div *ngIf="result.imgURL; else defaultImg">
+          <img (click)="logIdTitle(result)" src="{{result.imgURL}}">
+      </div>
+      <ng-template #defaultImg>
+          <img (click)="logIdTitle(result)" src="{{result}}">
+      </ng-template>
+  </div>
+  </div>
+  
+  <br> <br>
+  
 
-<h3 class="title">Type-Boy</h3>
-<div *ngFor="let item of (reasonswhy ); index as i; first as isFirst; odd as odd; even as even;" >
-  <app-content-card *ngIf="item.type=='Boy'" [char]="item" 
-  class="chess-player-{{i}}" class="boy" >
-</app-content-card>
-</div>
-
-<h3 class="title">Type-Girl</h3>
-<div *ngFor="let item of (reasonswhy ); index as i; first as isFirst; odd as odd; even as even;" >
-  <app-content-card *ngIf="item.type=='Girl'" [char]="item" 
-   class="chess-player-{{i}}" class="girl">
- </app-content-card>
- </div>
-
- <h3 class="title">Type-Not Found</h3>
- <div *ngFor="let item of (reasonswhy ); index as i; first as isFirst; odd as odd; even as even;" >
-  <app-content-card *ngIf="item.type==''" [char]="item" 
-   class="chess-player-{{i}}" class="nothing">
- </app-content-card>
- </div>
-
+  
+<!--   
+  <p *ngIf="searchResult !== null" >
+      <span [style.color]="searchResults ? 'green' : 'red'">
+          {{searchResults ? 'Title Found' : 'Title NOt Found'}}
+          <h1>Search Result Found</h1>
+          <div *ngFor="let content of reasonswhy" >
+              <h2>{{content.title}}</h2>
+              <p>Author: {{content.author}}</p>
+              <p appHoverAffect>Type: {{content.type}}</p>
+          
+              <div>
+                  Hashtag: 
+                  <p *ngFor="let tag of content.hashtag" [appHoverAffect]="'bold'">{{tag}}</p>
+              </div>
+          
+              <div *ngIf="content.imgURL; else defaultImg">
+                  <img (click)="logIdTitle(content)" src="{{content.imgURL}}">
+              </div>
+              <ng-template #defaultImg>
+                  <img (click)="logIdTitle(content)" src="{{defaultImageURL}}">
+              </ng-template>
+              </div>
+     
+      </span>
+      
+  </p>
+  
+  <br> <br> -->
+  
+  <h1>Type Not Found</h1>
+  <div *ngFor="let content of reasonswhy | TypePipe" class="nothing">
+      <h2>{{content.title}}</h2>
+      <p>Author: {{content.author}}</p>
+      <p appHoverAffect>Type: {{content.type}}</p>
+  
+      <div>
+          Hashtag: 
+          <p *ngFor="let tag of content.hashtag" [appHoverAffect]="'bold'">{{tag}}</p>
+      </div>
+  
+      <div *ngIf="content.imgURL; else defaultImg">
+          <img (click)="logIdTitle(content)" src="{{content.imgURL}}">
+      </div>
+      <ng-template #defaultImg>
+          <img (click)="logIdTitle(content)" src="{{defaultImageURL}}">
+      </ng-template>
+  </div>
+  
+  <br> <hr> <br>
+  
+  <h1>Type-Girl</h1>
+  <div *ngFor="let content of reasonswhy| TypePipe:'Girl'" class="Girl">
+      <h2>{{content.title}}</h2>
+      <p>Author: {{content.author}}</p>
+      <p appHoverAffect>Type: {{content.type}}</p>
+  
+      <div>
+          Hashtag: 
+          <p *ngFor="let tag of content.hashtag" [appHoverAffect]="'bold'">{{tag}}</p>
+      </div>
+  
+      <div *ngIf="content.imgURL; else defaultImg">
+          <img (click)="logIdTitle(content)" src="{{content.imgURL}}">
+      </div>
+      <ng-template #defaultImg>
+          <img (click)="logIdTitle(content)" src="{{defaultImageURL}}">
+      </ng-template>
+  </div>
+  
+  
+  <br> <hr> <br>
+  
+  <h1>Type-Boy</h1>
+  <div *ngFor="let content of reasonswhy | TypePipe:'Boy'" class="Boy">
+      <h2>{{content.title}}</h2>
+      <p>Author: {{content.author}}</p>
+      <p appHoverAffect>Type: {{content.type}}</p>
+  
+      <div>
+          Hashtag: 
+          <p *ngFor="let tag of content.hashtag" [appHoverAffect]="'bold'">{{tag}}</p>
+      </div>
+      
+      <div *ngIf="content.imgURL; else defaultImg">
+          <img (click)="logIdTitle(content)" src="{{content.imgURL}}">
+      </div>
+      <ng-template #defaultImg>
+          <img (click)="logIdTitle(content)" src="{{defaultImageURL}}">
+      </ng-template>
+  </div>

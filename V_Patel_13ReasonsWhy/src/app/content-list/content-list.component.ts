@@ -1,22 +1,75 @@
 
+
+
 import { Component, OnInit } from '@angular/core';
 import { Content } from '../helper-files/content-interface';
 
 @Component({
   selector: 'app-content-list',
   templateUrl: './content-list.component.html',
-  styleUrls: ['./content-list.component.scss']
+   styleUrls: ['./content-list.component.scss']
+  
 })
+export class ContentListComponent  {
+  defaultImageURL: string = 'https://resizing.flixster.com/qxCTpAWvvb6Y8cPJEFq_hafm5zc=/ems.cHJkLWVtcy1hc3NldHMvdHZzZXJpZXMvUlRUVjI5NTc2Ni53ZWJw';
 
-export class ContentListComponent implements OnInit {
-  reasonswhy:Content[];
-  types: string[] = ["", "IM", "FM", "GM"];
-  titleSearchMessage = {
-    message: "",
-    found: false
-  };
+  reasonswhy: Content[];
+  titleSearchText:string = '';
+  searchResult: boolean | null = null;
+  failedStringMessage: string = '';
 
-  constructor() {
+  public inputValue: String = '';
+  public searchMsg: String = '';
+
+  public Reasonswhy: Content[] = [];
+  public IDsearch!: number;
+  public searchResults: any[] = [];
+
+// Reasonswhy: any;
+
+  logIdTitle(card: any){
+    console.log(`${card.id}, ${card.title}`);
+    console.log(`id:- ${card.id}`);
+     console.log(`Title:- ${card.title}`);
+  }
+  SearchTitle(){
+    console.log(this.searchResult);
+    console.log("SearchResultText:-",this.searchResult);
+    console.log("SearchText:-",this.titleSearchText);
+    this.searchResult = this.reasonswhy.some(content => content.title.toLocaleLowerCase().includes (this.titleSearchText.toLocaleLowerCase()));
+  }
+
+  searchId(id: number) {
+    const title = this.reasonswhy.find(title => title.id === id);
+    console.log('Title ID For result:', title);
+    if (title) {
+      console.log('Title found:', title);
+      this.searchResults.push(title);
+  
+    } else {
+      console.log('Title not found');
+    }
+  }
+
+  addContent(newInfo: any){
+    console.log(this.failedStringMessage);
+    const promise = new Promise((resolve, reject) => {
+      this.reasonswhy.push(newInfo);
+      this.reasonswhy = [...this.reasonswhy]
+      resolve(newInfo.title);
+    });
+
+    promise.then(title => {
+      console.log(`Information added successfully, ${title}`);
+      this.failedStringMessage = '';
+    }).catch(error => {
+      this.failedStringMessage = "Information not added";
+    });
+  }
+
+  
+
+    constructor() {
 
     this.reasonswhy = [{
       id: 0,
@@ -32,7 +85,7 @@ export class ContentListComponent implements OnInit {
       title: 'Jessica Davis',
       body: "She was the second best friend of Hannah Baker before she committed suicide, and is a person on Hannah's tapes. It's later revealed that Jessica was raped by Bryce Walker, and after coming to terms with this, decides to stand up to him, Liberty High, and increase the awareness of rape victims.",
       author: 'Jay Asher',
-      // imgURL: 'http://t2.gstatic.com/licensed-image?q=tbn:ANd9GcQcflB3IqyYLKtkkSMGG-Wa-ks-78otBqwoQ7EM60n-myKNCb7Y8J4Fd9Cl6jZA8yZB_sF9oDZmcit9P44',
+      imgURL: 'http://t2.gstatic.com/licensed-image?q=tbn:ANd9GcQcflB3IqyYLKtkkSMGG-Wa-ks-78otBqwoQ7EM60n-myKNCb7Y8J4Fd9Cl6jZA8yZB_sF9oDZmcit9P44',
       type: 'Girl',
       hashtag: ['Davis']
     },
@@ -80,43 +133,12 @@ export class ContentListComponent implements OnInit {
       imgURL: 'https://media1.popsugar-assets.com/files/thumbor/UdVb0TR9c6UJJnXMJ1_tyKNbN5A/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2019/07/28/806/n/44701584/0d0f6dbf13e08598_GettyImages-978578768/i/Justin-Prentice-Bryce-Walker.jpg',
       type: '',
       hashtag: ['Bryce']
-    } 
-    ]
-  }
- 
-  value = '';
-  getValue(input:string)
-  {
-    let inputBox = (<HTMLInputElement>document.querySelector('input'));
-    this.reasonswhy.forEach(e => {
-      if(e.title === input)
-      {
-        this.value = `Content item exists with the Title ${input}`
-        inputBox.style.color = "green";
-        return  this.value;
-        
-      }
-      else
-      {
-        this.value = `Content item doesn't exists with the Title ${input}`;
-        inputBox.style.color = "red";
-        return  this.value;
-      }
-    })
-  }
-
-  ngOnInit(): void {
-  }
-  checkForTitleInList(titleNameValue: string): void {
-    if (this.reasonswhy.some(player => player.title === titleNameValue)) {
-      this.titleSearchMessage.message = "Title Found";
-      this.titleSearchMessage.found = true;
-    }
-    else {
-      this.titleSearchMessage.message = "Title Not Found";
-      this.titleSearchMessage.found = false;
-    }
-  }
-
+    } ,
+    
+  ];
 }
-
+  
+  showTitleInfo(id: any, title: String) {
+    console.log({ id, title });
+  }
+}

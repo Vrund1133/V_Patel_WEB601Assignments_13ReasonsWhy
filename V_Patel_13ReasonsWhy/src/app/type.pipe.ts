@@ -2,16 +2,18 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Content } from './helper-files/content-interface';
 
 @Pipe({
-  name: 'type'
+  name: 'TypePipe'
 })
 export class TypePipe implements PipeTransform {
 
-  transform(reasonswhy:Content[], typeInput?: string): Content[] {
-    return  reasonswhy.filter(character =>{
-      return !character.type?.length 
-      || character.type =="Boy" || character.type =="Girl";
 
-    })
+  transform(contentItem: Content[], filter?: String): any {
+    if(!filter){
+      return contentItem.filter(item => !item.type);
+    }
+
+    return contentItem.filter(item => item.type === filter);
   }
+ 
 
 }
