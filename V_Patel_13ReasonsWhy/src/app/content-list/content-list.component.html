@@ -1,39 +1,162 @@
 
-<!-- <h2 class="title">13 Reasons Why</h2><div>
-    <app-content-card *ngFor="let item of reasonswhy; index as i; first as isFirst; odd as odd; even as even;" [char]="item"
-      class="reasons-{{i+1}}"  [class.is-odd]="odd" [class.is-even]="even">
-    </app-content-card>
-</div> -->
+ <main>
+  <div class="SearchbyTitle">
+    <input type="number" [(ngModel)]="IDsearch" placeholder=" Search By ID Here" >
+      <button
+      (click)="searchId(IDsearch)">Search
+    </button>
+  </div>
+  <div *ngIf="Search !== null"  >
+    <p [style.color] = "Search ? 'green' : 'red'" >
+       {{ Search ? 'Matched' : 'Not Matched'}}
+       </p>
+  </div>
+</main>
 
+<div>
+<h2>Character Search</h2>
+<div *ngFor="let content of reasonswhy | PipeType:'classic'" class="classic-type">
 
-<div><label>
-  Title name search:
-  <input #titleToSearchFor>
-</label>
-<button (click)="checkForTitleInList(titleToSearchFor.value)">Check for Title</button>
+<div class="card">
+    
+  <div *ngFor="let result of searchResults">
+   
+    <div *ngIf="result.imgURL; else noImg">
+      <img
+      src="{{ result.imgURL }}"
+      (click)="showCharacterInfo(result.id, result.title)"/>
+  </div>
+  <ng-template #noImg>
+    <img
+    src="{{ defaultimg }}"
+    (click)="showCharacterInfo(result.id, result.title)"/>
+  </ng-template>
+   
+    <h5 class="card-title" *ngIf="content?.title">
+      {{ result.title }}
+    </h5>
+  </div>
+  </div>
 </div>
-<div class="title-error" [style]="titleSearchMessage.found ? 'color: green' : 'color: red'">
-{{ titleSearchMessage.message }}
 </div>
 
-<h3 class="title">Type-Boy</h3>
-<div *ngFor="let item of (reasonswhy ); index as i; first as isFirst; odd as odd; even as even;" >
-  <app-content-card *ngIf="item.type=='Boy'" [char]="item" 
-  class="chess-player-{{i}}" class="boy" >
-</app-content-card>
+
+<div>
+<h2>Type Not Found</h2>
+
+<div *ngFor="let reasonwhy of reasonswhy | PipeType" class="nothing">
+    <div class="card">
+     
+      <div *ngIf="reasonwhy.imgURL; else noImg">
+          <img
+          src="{{ reasonwhy.imgURL }}"
+          (click)="showCharacterInfo(reasonwhy.id, reasonwhy.title)"/>
+      </div>
+      <ng-template #noImg>
+        <img
+        src="{{ defaultimg }}"
+      (click)="showCharacterInfo(reasonwhy.id, reasonwhy.title)"/>
+      </ng-template>
+
+      <div class="col-md-8">
+        <h5 class="card-title" *ngIf="reasonwhy?.title">
+          {{ reasonwhy.title }}
+        </h5>
+        <p class="card-text" *ngIf="reasonwhy?.body">
+          {{ reasonwhy.body }}
+        </p>
+        <p class="card-text" *ngIf="reasonwhy?.author">
+          <strong>Author</strong> {{ reasonwhy?.author }}
+        </p>
+        <p class="card-text" *ngIf="reasonwhy?.type"  appHoverAffect="underline">
+          <strong>Type</strong> {{ reasonwhy?.type }}
+        </p>
+        <p class="card-text" *ngIf="reasonwhy?.hashtag"  >
+          <strong>Hashtag</strong> 
+          <span *ngFor="let hashtag of reasonwhy?.hashtag" appHoverAffect="bold"> {{hashtag}},
+          </span>
+        </p>
+      </div>
+    </div>
+</div>
 </div>
 
-<h3 class="title">Type-Girl</h3>
-<div *ngFor="let item of (reasonswhy ); index as i; first as isFirst; odd as odd; even as even;" >
-  <app-content-card *ngIf="item.type=='Girl'" [char]="item" 
-   class="chess-player-{{i}}" class="girl">
- </app-content-card>
- </div>
 
- <h3 class="title">Type-Not Found</h3>
- <div *ngFor="let item of (reasonswhy ); index as i; first as isFirst; odd as odd; even as even;" >
-  <app-content-card *ngIf="item.type==''" [char]="item" 
-   class="chess-player-{{i}}" class="nothing">
- </app-content-card>
- </div>
+<div>
+<h2>Type-Girl</h2>
 
+<div *ngFor="let reasonwhy of reasonswhy | PipeType:'Girl'" class="Girl">
+    <div class="card">
+      <div *ngIf="reasonwhy.imgURL; else noImg">
+        <img
+        src="{{ reasonwhy.imgURL }}"
+        (click)="showCharacterInfo(reasonwhy.id, reasonwhy.title)"/>
+    </div>
+    <ng-template #noImg>
+      <img
+      src="{{ defaultimg }}"
+      (click)="showCharacterInfo(reasonwhy.id, reasonwhy.title)"/>
+    </ng-template>
+
+    <div class="col-md-8">
+      <h5 class="card-title" *ngIf="reasonwhy?.title">
+        {{ reasonwhy.title }}
+      </h5>
+      <p class="card-text" *ngIf="reasonwhy?.body">
+        {{ reasonwhy.body }}
+      </p>
+      <p class="card-text" *ngIf="reasonwhy?.author">
+        <strong>Author</strong> {{ reasonwhy?.author }}
+      </p>
+      <p class="card-text" *ngIf="reasonwhy?.type"  appHoverAffect="underline">
+        <strong>Type</strong> {{ reasonwhy?.type }}
+      </p>
+      <p class="card-text" *ngIf="reasonwhy?.hashtag"  >
+        <strong>Hashtag</strong> 
+        <span *ngFor="let hashtag of reasonwhy?.hashtag" appHoverAffect="bold"> {{hashtag}},
+        </span>
+        </p>
+      </div>
+    </div>
+</div>
+</div>
+
+
+<div>
+<h2>Type-Boy</h2>
+
+<div *ngFor="let reasonwhy of reasonswhy | PipeType:'Boy'" class="Boy">
+    <div class="card">
+      <div *ngIf="reasonwhy.imgURL; else noImg">
+        <img
+        src="{{ reasonwhy.imgURL }}"
+        (click)="showCharacterInfo(reasonwhy.id, reasonwhy.title)"/>>
+    </div>
+    <ng-template #noImg>
+      <img
+      src="{{ defaultimg }}"
+      (click)="showCharacterInfo(reasonwhy.id, reasonwhy.title)"/>
+    </ng-template>
+
+    <div class="col-md-8">
+      <h5 class="card-title" *ngIf="reasonwhy?.title">
+        {{ reasonwhy.title }}
+      </h5>
+      <p class="card-text" *ngIf="reasonwhy?.body">
+        {{ reasonwhy.body }}
+      </p>
+      <p class="card-text" *ngIf="reasonwhy?.author">
+        <strong>Author</strong> {{ reasonwhy?.author }}
+      </p>
+      <p class="card-text" *ngIf="reasonwhy?.type"  appHoverAffect="underline">
+        <strong>Type</strong> {{ reasonwhy?.type }}
+      </p>
+      <p class="card-text" *ngIf="reasonwhy?.hashtag"  >
+        <strong>Hashtag</strong> 
+        <span *ngFor="let hashtag of reasonwhy?.hashtag" appHoverAffect="bold"> {{hashtag}},
+        </span>
+        </p>
+      </div>
+    </div>
+</div>
+</div>
