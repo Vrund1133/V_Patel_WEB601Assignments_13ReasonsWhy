@@ -1,2 +1,39 @@
+<div>
+    <div class="card">
+     
+      <div *ngIf="SelectedContent.imgURL; else noImg">
+          <img
+          src="{{ SelectedContent.imgURL }}"
+          (click)="showCharacterInfo(SelectedContent.id, SelectedContent.title)"/>
+      </div>
+      <ng-template #noImg>
+        <img
+        src="{{ defaultimg }}"
+      (click)="showCharacterInfo(SelectedContent.id, SelectedContent.title)"/>
+      </ng-template>
+
+      <div class="col-md-8">
+        <h5 class="card-title" *ngIf="SelectedContent?.title">
+          {{ SelectedContent.title }}
+        </h5>
+        <p class="card-text" *ngIf="SelectedContent?.body">
+          {{ SelectedContent.body }}
+        </p>
+        <p class="card-text" *ngIf="SelectedContent?.author">
+          <strong>Author</strong> {{ SelectedContent?.author }}
+        </p>
+        <p class="card-text" *ngIf="SelectedContent?.type"  appHoverAffect="underline">
+          <strong>Type</strong> {{ SelectedContent?.type }}
+        </p>
+        <p class="card-text" *ngIf="SelectedContent?.hashtag"  >
+          <strong>Hashtag</strong> 
+          <span *ngFor="let hashtag of SelectedContent?.hashtag" appHoverAffect="bold"> {{hashtag}},
+          </span>
+        </p>
+      </div>
+    </div>
+</div>
 
 <app-content-list></app-content-list>
+
+<app-messages></app-messages>
