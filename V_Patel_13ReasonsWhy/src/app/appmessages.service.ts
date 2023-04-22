@@ -1,13 +1,3 @@
-// import { Injectable } from '@angular/core';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class AppmessagesService {
-
-//   constructor() { }
-// }
-
 
 import { Injectable } from '@angular/core';
 
@@ -20,10 +10,8 @@ export class AppMessageService {
   addMessage(message: string){
     this.messages.push(message);
   }
-
   clear(){
     this.messages = [];
   }
-
   constructor() { }
 }

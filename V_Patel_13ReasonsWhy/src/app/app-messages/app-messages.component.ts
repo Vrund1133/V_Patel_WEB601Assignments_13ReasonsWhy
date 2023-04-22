@@ -8,6 +8,4 @@ import { AppMessageService } from '../appmessages.service';
 })
 export class MessagesComponent {
   constructor(public AppmessageService: AppMessageService){}
-
-
 }
